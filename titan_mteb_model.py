@@ -32,7 +32,10 @@ class BedrockTitanEmbedding:
                     0.1
                 )  # add sleep to avoid throttling https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html
             return np_array
-        except:
+        except Exception as e:
+            print(e)
+            if chunk_size <= 1000:
+                return np.array([])
             return self.get_embeddings(sentence, chunk_size=chunk_size // 2)
 
     def encode(self, sentences, batch_size=1, **kwargs):

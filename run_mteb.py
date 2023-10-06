@@ -26,14 +26,14 @@ TASK_LIST_RETRIEVAL = [
 ]
 
 RETRIEVAL_TASKS = [
-    "SciFact",
-    "FiQA2018",
-    "HotpotQA",
+    # "SciFact",
     "ArguAna",
     "ClimateFEVER",
+    "FiQA2018",
+    "HotpotQA",
     "QuoraRetrieval",
-    "TRECCOVID",
     "Touche2020",
+    "TRECCOVID",
 ]
 
 
