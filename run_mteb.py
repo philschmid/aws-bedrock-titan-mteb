@@ -5,8 +5,6 @@ from titan_mteb_model import BedrockTitanEmbedding
 from mteb import MTEB
 
 TASK_LIST_RETRIEVAL = [
-    "ArguAna",
-    "ClimateFEVER",
     "CQADupstackAndroidRetrieval",
     "CQADupstackEnglishRetrieval",
     "CQADupstackGamingRetrieval",
@@ -21,16 +19,21 @@ TASK_LIST_RETRIEVAL = [
     "CQADupstackWordpressRetrieval",
     "DBPedia",
     "FEVER",
-    "FiQA2018",
-    "HotpotQA",
     "MSMARCO",
     "NFCorpus",
     "NQ",
-    "QuoraRetrieval",
     "SCIDOCS",
+]
+
+RETRIEVAL_TASKS = [
     "SciFact",
-    "Touche2020",
+    "FiQA2018",
+    "HotpotQA",
+    "ArguAna",
+    "ClimateFEVER",
+    "QuoraRetrieval",
     "TRECCOVID",
+    "Touche2020",
 ]
 
 
@@ -48,7 +51,7 @@ if __name__ == "__main__":
 
     model = BedrockTitanEmbedding(model=args.model, profile=args.aws_profile)
 
-    for task in ["FEVER"]:
+    for task in RETRIEVAL_TASKS:
         print(f"Running task: {task}")
         eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
         evaluation = MTEB(tasks=[task], task_langs=["en"])  # Remove "en" for running all languages
