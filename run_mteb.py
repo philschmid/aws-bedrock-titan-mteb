@@ -4,36 +4,29 @@ from typing import List, Optional
 from titan_mteb_model import BedrockTitanEmbedding
 from mteb import MTEB
 
-TASK_LIST_RETRIEVAL = [
-    "CQADupstackAndroidRetrieval",
-    "CQADupstackEnglishRetrieval",
-    "CQADupstackGamingRetrieval",
-    "CQADupstackGisRetrieval",
-    "CQADupstackMathematicaRetrieval",
-    "CQADupstackPhysicsRetrieval",
-    "CQADupstackProgrammersRetrieval",
-    "CQADupstackStatsRetrieval",
-    "CQADupstackTexRetrieval",
-    "CQADupstackUnixRetrieval",
-    "CQADupstackWebmastersRetrieval",
-    "CQADupstackWordpressRetrieval",
-    "DBPedia",
-    "FEVER",
-    "MSMARCO",
-    "NFCorpus",
-    "NQ",
-    "SCIDOCS",
-]
+# https://huggingface.co/spaces/mteb/leaderboard
 
-RETRIEVAL_TASKS = [
-    # "SciFact",
-    "ArguAna",
-    "ClimateFEVER",
-    "FiQA2018",
-    "HotpotQA",
-    "QuoraRetrieval",
-    "Touche2020",
+TASKS = [
+    ## Classification
+    # "Banking77Classification", ✅
+    # "AmazonCounterfactualClassification", ✅
+    # Clustering 
+    # "StackExchangeClusteringP2P",
+    # Ranking 
+    # "SciDocsRR",
+    #STS
+    # "STS22"
+    ## Retrieval
+    # "NQ", 
+    # "SciFact", ✅
+    # "ArguAna", ✅
+    # "ClimateFEVER", # too  big
+    # "HotpotQA", # too big
+    # "Touche2020",
     "TRECCOVID",
+    "FiQA2018",
+    "MSMARCO"
+    # "QuoraRetrieval", # too big
 ]
 
 
@@ -51,7 +44,7 @@ if __name__ == "__main__":
 
     model = BedrockTitanEmbedding(model=args.model, profile=args.aws_profile)
 
-    for task in RETRIEVAL_TASKS:
+    for task in TASKS:
         print(f"Running task: {task}")
         eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
         evaluation = MTEB(tasks=[task], task_langs=["en"])  # Remove "en" for running all languages

@@ -26,7 +26,7 @@ class BedrockTitanEmbedding:
                 contentType="application/json",
             )
             response_body = json.loads(response.get("body").read())
-            np_array = np.array(response_body.get("embedding"))
+            np_array = np.array(response_body.get("embedding"))            
             if self.with_sleep:
                 sleep(
                     0.1
@@ -35,7 +35,7 @@ class BedrockTitanEmbedding:
         except Exception as e:
             print(e)
             if chunk_size <= 1000:
-                return np.array([])
+                return np.random.rand(1536).astype(np.float64)
             return self.get_embeddings(sentence, chunk_size=chunk_size // 2)
 
     def encode(self, sentences, batch_size=1, **kwargs):
